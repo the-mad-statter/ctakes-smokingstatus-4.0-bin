@@ -1,0 +1,37 @@
+name: make
+
+on:
+  push:
+    branches: [ "dev" ]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Make bin/ctakes-smokingstatus-4.0-bin.zip
+        run: |
+          rm bin/ctakes-smokingstatus-4.0-bin.zip
+          cd src
+          zip -r ctakes-smokingstatus-4.0-bin.zip *
+          cd ..
+          mv src/ctakes-smokingstatus-4.0-bin.zip bin/ctakes-smokingstatus-4.0-bin.zip
+
+      - name: Make bin/ctakes-smokingstatus-4.0-bin.tar.gz
+        run: |
+          rm bin/ctakes-smokingstatus-4.0-bin.tar.gz
+          cd src
+          tar -czvf ../bin/ctakes-smokingstatus-4.0-bin.tar.gz *
+
+      - name: Push changes
+        run: |
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git commit -am 'Make' || echo "No changes to commit"
+          git push || echo "No changes to commit"
+          
