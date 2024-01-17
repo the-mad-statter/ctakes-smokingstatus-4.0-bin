@@ -13,8 +13,8 @@ tar -xvf apache-ctakes-4.0.0.1-bin.tar.gz -C /usr/local
 
 # Step 3. Install cTAKES Resources
 wget http://sourceforge.net/projects/ctakesresources/files/ctakes-resources-4.0-bin.zip
-unzip ctakes-resources-4.0-bin.zip
-cp -R ./resources/* /usr/local/apache-ctakes-4.0.0.1/resources
+unzip -o ctakes-resources-4.0-bin.zip
+\cp -rf ./resources/* /usr/local/apache-ctakes-4.0.0.1/resources
 
 # Step 4. Install cTAKES Smoking Status
 wget https://github.com/the-mad-statter/ctakes-smokingstatus-4.0-bin/raw/main/bin/ctakes-smokingstatus-4.0-bin.tar.gz
